@@ -1,33 +1,17 @@
-# My-Vue
-vue demo
+## elementui checkbox 性能优化
 
-记录一些平时开发中常用的demo
+在做数据分析的相关项目时，遇到的数据量往往时非常巨大的；比如当我在获取一个数据文件内的所有文件时，这个数据量可能时上千上万条的；
 
-1. 用自定义指针或者extend实现加载提示；
+有这样的一个场景：当需要训练数据的时候，这时用户需要过滤一些需要或者不需要训练的数据，因为项目中插入了element UI，所以也利用element UI中的chekbox插件来作为多选框；
 
+这时候问题来了，当加载上千上万条数据作为选项的时候，响应会比较慢，这个响应的间隔时间可能会对用户体验影响非常大，所以这时需要对数据做优化；
 
+原因：每次数据更新都会触发dom的更新，导致数据量越多更新越慢；
 
-# myvue
+#### 方法一： 滚动加载
 
-## Project setup
-```
-npm install
-```
+实施： 加入页面可是区域只显示10条数据；首先，页面中的选项一直都保持20条数据； 然后，在向下滚动的时候，滚动到底部的时候，会在底部插入新的10条数据，并在头部顶部把超出可视区域的10条数据删除；接着向上滚动的时候也是一样的道理；
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+可以查看组件 [checkBoxPerform](./src/components/checkBoxPerform.vue);
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+还有就是如果在弹窗中添加这种情况的多选框，弹窗在关闭时也会有所卡顿；
