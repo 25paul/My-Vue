@@ -1,7 +1,9 @@
-# My-Vue
+## My-Vue
 vue demo
 
-记录一些平时开发中常用的demo
+1. [#优化# vue elementUI checkbox 数据量大时响应卡顿](./tree/elementui-checkbox)
+
+#### 备注
 
 1. 用自定义指针或者extend实现加载提示；
 
