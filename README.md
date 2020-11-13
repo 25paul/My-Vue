@@ -1,7 +1,7 @@
 ## My-Vue
 vue demo
 
-1. [#优化# vue elementUI checkbox 数据量大时响应卡顿](./tree/elementui-checkbox)
+1. [#优化# vue elementUI checkbox 数据量大时响应卡顿](https://github.com/25paul/My-Vue/tree/elementui-checkbox)
 
 #### 备注
 
