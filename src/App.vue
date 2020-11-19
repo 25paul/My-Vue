@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <simple-pie></simple-pie>
-    <simple-area></simple-area>
+    <simple-pie v-if="false"></simple-pie>
+    <simple-area v-if="false"></simple-area>
+    <sortable-bar></sortable-bar>
   </div>
 </template>
 
 <script>
 import SimplePie from './components/simplePie.vue';
 import SimpleArea from './components/simpleArea.vue';
+import SortableBar from './components/fromOfficial/sortableBar.vue';
 
 export default {
   name: 'App',
   components: {
     SimplePie,
-    SimpleArea
+    SimpleArea,
+    SortableBar
   }
 }
 </script>
