@@ -30,7 +30,9 @@ export default {
       // console.log(d3.create('svg').node());
       // 使用d3创建svg，设置属性
       const svg = d3.create("svg")
-        .attr("viewBox", [0, 0, width, height]);
+        .attr("viewBox", [0, 0, width, height])
+        .attr('width', width)
+        .attr('height', height);
 
       // svg.node() 可以获得是svg节点
       this.chartRef.appendChild(svg.node());
@@ -56,12 +58,15 @@ export default {
         .call(g => g.select(".domain").remove())
       
       const gx = svg.append("g")
+        .attr("class", "x-axis")
         .call(xAxis);
 
       svg.append("g")
+        .attr("class", "y-axis")
         .call(yAxis);
 
       const bar = svg.append("g")
+        .attr("class", "bars")
         .attr("fill", "steelblue")
         .selectAll("rect")
         .data(data)
@@ -74,9 +79,11 @@ export default {
 
       // this.chartRef.appendChild(svg.node());
 
+      /*
+      *添加排序
+      */
       const t = svg.transition()
         .duration(750);
-
       // data.sort();
       // let arm = data[0];
       // data[0] = data[1];
@@ -85,18 +92,35 @@ export default {
       console.log(data);
       x.domain(data.map(d => d.name));
       bar.data(data, d => d.name)
-          // .order()
-          .transition(t)
-          .delay((d, i) => i * 20)
-          .attr("x", d => x(d.name));
+        // .order()
+        .transition(t)
+        .delay((d, i) => i * 20)
+        .attr("x", d => x(d.name));
       console.log(gx)
       gx.transition(t)
-          .call(xAxis)
+        .call(xAxis)
         .selectAll(".tick")
-          .delay((d, i) => i * 20);
+        .delay((d, i) => i * 20);
 
+      /*
+      * 缩放
+      * https://observablehq.com/@d3/zoomable-bar-chart
+      */
+      const extent = [[margin.left, margin.top], [width - margin.right, height - margin.top]];
+      svg.call(d3.zoom()
+        .scaleExtent([1, 8])
+        .translateExtent(extent)
+        .extent(extent)
+        .on("zoom", function (event) {
+          console.log('aaa')
+          console.log([margin.left, width - margin.right].map(d => event.transform.applyX(d)))
+          x.range([margin.left, width - margin.right].map(d => event.transform.applyX(d)));
+          console.log('svg.selectAll(".bars rect")', svg.selectAll(".bars rect"))
+          svg.selectAll(".bars rect").attr("x", d => x(d.name)).attr("width", x.bandwidth());
+          svg.selectAll(".x-axis").call(xAxis);
+        }));      
     }
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
