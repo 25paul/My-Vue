@@ -55,13 +55,13 @@ export default {
         .call(d3.axisLeft(y))
         .call(g => g.select(".domain").remove())
       
-      svg.append("g")
+      const gx = svg.append("g")
         .call(xAxis);
 
       svg.append("g")
         .call(yAxis);
 
-      svg.append("g")
+      const bar = svg.append("g")
         .attr("fill", "steelblue")
         .selectAll("rect")
         .data(data)
@@ -73,6 +73,27 @@ export default {
         .attr("width", x.bandwidth());
 
       // this.chartRef.appendChild(svg.node());
+
+      const t = svg.transition()
+        .duration(750);
+
+      // data.sort();
+      // let arm = data[0];
+      // data[0] = data[1];
+      // data[1] = arm;
+      data.reverse();
+      console.log(data);
+      x.domain(data.map(d => d.name));
+      bar.data(data, d => d.name)
+          // .order()
+          .transition(t)
+          .delay((d, i) => i * 20)
+          .attr("x", d => x(d.name));
+      console.log(gx)
+      gx.transition(t)
+          .call(xAxis)
+        .selectAll(".tick")
+          .delay((d, i) => i * 20);
 
     }
   },
