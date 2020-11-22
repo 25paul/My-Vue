@@ -6,7 +6,7 @@
 
 <script>
 import * as d3 from 'd3';
-import { areaChart } from '../../chartdata/areaChart';
+import { areaChart } from '../../chartdata/areaWithMissingData';
 export default {
   data () {
     return {
@@ -71,13 +71,20 @@ export default {
 
       // x坐标轴的日期为什么格式，这里在画区域的时候就要用什么格式
       // 当数据太多难找错时，可以把数据截掉一部分
-      let curve = d3.curveLinear
+      // let curve = d3.curveLinear
       console.log(data);
       let area = d3.area()
-        .curve(curve)
+        .defined(d => !isNaN(d.value))
         .x(d => x(new Date(d.date)))
         .y0(y(0))
         .y1(d => y(d.value))
+
+      // 省略的话默认是灰色，也可以自己设置
+      svg.append("path")
+        .datum(data.filter(area.defined()))
+        .attr("fill", "#ff000c")
+        .attr("d", area);
+
       svg.append("path")
         .datum(data)
         .attr("fill", "steelblue")

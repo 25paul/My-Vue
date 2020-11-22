@@ -1,4 +1,4 @@
-<!--  -->
+<!--https://observablehq.com/@d3/line-chart  -->
 <template>
   <div id="chart" ref="chart">
   </div>
@@ -6,7 +6,7 @@
 
 <script>
 import * as d3 from 'd3';
-import { areaChart } from '../../chartdata/areaChart';
+import { areaChart } from '../../chartdata/lineChart';
 export default {
   data () {
     return {
@@ -36,13 +36,9 @@ export default {
 
       this.chartRef.appendChild(svg.node());
 
-      console.log(d3.extent(data, d => d.date))
       let x = d3.scaleUtc()
         .domain(d3.extent(data, d => new Date(d.date)))
         .range([margin.left, width - margin.right])
-      // let x = d3.scaleTime()
-      //   .domain([Date.now(), Date.now() + 21 * 60 * 60 * 1000]).nice()
-      //   .range([margin.left, width - margin.right])
 
       let y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.value)]).nice()
@@ -68,20 +64,19 @@ export default {
       svg.append("g")
         .call(yAxis);
 
-
-      // x坐标轴的日期为什么格式，这里在画区域的时候就要用什么格式
-      // 当数据太多难找错时，可以把数据截掉一部分
-      let curve = d3.curveLinear
-      console.log(data);
-      let area = d3.area()
-        .curve(curve)
+      let line = d3.line()
+        .defined(d => !isNaN(d.value))
         .x(d => x(new Date(d.date)))
-        .y0(y(0))
-        .y1(d => y(d.value))
+        .y(d => y(d.value))
+
       svg.append("path")
         .datum(data)
-        .attr("fill", "steelblue")
-        .attr("d", area);
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("d", line);
 
     }
   }

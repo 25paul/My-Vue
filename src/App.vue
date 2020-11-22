@@ -4,7 +4,12 @@
     <simple-area v-if="false"></simple-area>
     <sortable-bar v-if="false"></sortable-bar>
     <horizontal-bar v-if="false"></horizontal-bar>
-    <area-chart></area-chart>
+    <area-chart v-if="false"></area-chart>
+    <area-with-missing-data v-if="false"></area-with-missing-data>
+    <kernel-density-estimation v-if="false"></kernel-density-estimation>
+    <line-chart v-if="false"></line-chart>
+    <pie-chart v-if="false"></pie-chart>
+    <donut-chart></donut-chart>
   </div>
 </template>
 
@@ -14,6 +19,11 @@ import SimpleArea from './components/simpleArea.vue';
 import SortableBar from './components/fromOfficial/sortableBar.vue';
 import HorizontalBar from './components/fromOfficial/horizontalBar.vue';
 import AreaChart from './components/fromOfficial/areaChart.vue';
+import AreaWithMissingData from './components/fromOfficial/areaWithMissingData.vue';
+import KernelDensityEstimation from './components/fromOfficial/kernelDensityEstimation.vue';
+import LineChart from './components/fromOfficial/lineChart.vue';
+import PieChart from './components/fromOfficial/pieChart.vue';
+import DonutChart from './components/fromOfficial/donutChart.vue';
 
 export default {
   name: 'App',
@@ -22,7 +32,12 @@ export default {
     SimpleArea,
     SortableBar,
     HorizontalBar,
-    AreaChart
+    AreaChart,
+    AreaWithMissingData,
+    KernelDensityEstimation,
+    LineChart,
+    PieChart,
+    DonutChart
   }
 }
 </script>
