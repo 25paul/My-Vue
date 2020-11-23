@@ -23,14 +23,17 @@ export default {
     init () {
       const height = 500;
       const width = 800;
-      const data = [{"name":"T","value":0.09056},{"name":"A","value":0.08167},{"name":"E","value":0.12702},{"name":"O","value":0.07507},{"name":"I","value":0.06966},{"name":"N","value":0.06749},{"name":"S","value":0.06327},{"name":"H","value":0.06094},{"name":"R","value":0.05987},{"name":"D","value":0.04253},{"name":"L","value":0.04025},{"name":"C","value":0.02782},{"name":"U","value":0.02758},{"name":"M","value":0.02406},{"name":"W","value":0.0236},{"name":"F","value":0.02288},{"name":"G","value":0.02015},{"name":"Y","value":0.01974},{"name":"P","value":0.01929},{"name":"B","value":0.01492},{"name":"V","value":0.00978},{"name":"K","value":0.00772},{"name":"J","value":0.00153},{"name":"X","value":0.0015},{"name":"Q","value":0.00095},{"name":"Z","value":0.00074}]
+      // const data = [{"name":"T","value":0.09056},{"name":"A","value":0.08167},{"name":"E","value":0.12702},{"name":"O","value":0.07507},{"name":"I","value":0.06966},{"name":"N","value":0.06749},{"name":"S","value":0.06327},{"name":"H","value":0.06094},{"name":"R","value":0.05987},{"name":"D","value":0.04253},{"name":"L","value":0.04025},{"name":"C","value":0.02782},{"name":"U","value":0.02758},{"name":"M","value":0.02406},{"name":"W","value":0.0236},{"name":"F","value":0.02288},{"name":"G","value":0.02015},{"name":"Y","value":0.01974},{"name":"P","value":0.01929},{"name":"B","value":0.01492},{"name":"V","value":0.00978},{"name":"K","value":0.00772},{"name":"J","value":0.00153},{"name":"X","value":0.0015},{"name":"Q","value":0.00095},{"name":"Z","value":0.00074}]
+      const data = [{"name":"广东广州数立方广东广州数立方","value":0.09056},{"name":"中华人名共和国国歌","value":0.08167},{"name":"哈","value":0.12702},{"name":"哈哈","value":0.07507},{"name":"哈哈哈","value":0.06966},{"name":"哈哈哈哈","value":0.06749},{"name":"哈哈哈哈哈","value":0.06327},{"name":"H1111111111","value":0.06094},{"name":"R1111111111","value":0.05987},{"name":"D1111111111","value":0.04253},{"name":"L1111111111","value":0.04025},{"name":"C1111111111","value":0.02782},{"name":"U1111111111","value":0.02758},{"name":"M1111111111","value":0.02406},{"name":"W1111111111","value":0.0236},{"name":"F1111111111","value":0.02288},{"name":"G1111111111","value":0.02015},{"name":"Y1111111111","value":0.01974},{"name":"P1111111111","value":0.01929},{"name":"B1111111111","value":0.01492},{"name":"V1111111111","value":0.00978},{"name":"K1111111111","value":0.00772},{"name":"J1111111111","value":0.00153},{"name":"X1111111111","value":0.0015},{"name":"Q1111111111","value":0.00095},{"name":"Z1111111111","value":0.00074}]
+      // const data = [{"name":"广东广州数立方广东广州数立方","value":0.09056},{"name":"中华人名共和国国歌","value":0.08167},{"name":"哈","value":0.12702},{"name":"哈哈","value":0.07507},{"name":"哈哈哈","value":0.06966},{"name":"哈哈哈哈","value":0.06749},{"name":"哈哈哈哈哈","value":0.06327}]
+      // const data = [{"name":"广东广州数立方广东广州数立方","value":0.09056},{"name":"中华人名共和国国歌","value":0.08167},{"name":"哈","value":0.12702}]
       const margin = {top: 20, right: 0, bottom: 30, left: 40}
       // console.log(d3.select(this.chartRef));
       // console.log(d3.create('svg'));
       // console.log(d3.create('svg').node());
       // 使用d3创建svg，设置属性
       const svg = d3.create("svg")
-        .attr("viewBox", [0, 0, width, height])
+        .attr("viewBox", [0, 0, width * 2, height * 2])
         .attr('width', width)
         .attr('height', height);
 
@@ -40,17 +43,36 @@ export default {
       let x = d3.scaleBand()
         .domain(data.map(d => d.name))
         .range([margin.left, width - margin.right])
-        .padding(0.1)
+        .padding(0.2)
       
-      console.log(x('A'))
+      // console.log(x('A'))
 
       let y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.value)]).nice()
         .range([height - margin.bottom, margin.top])
+
+      let textStyle = g => {
+        // console.log('texthahah', g.selectAll("text").nodes())
+        // console.log('xbandwidth', x.bandwidth())
+        let xBandWdith = x.bandwidth();
+        var texts = g.selectAll("text").nodes();
+        for (let i = 0; i < texts.length; i++) {
+          // console.log('text'+i, texts[i].getBBox());
+          if (texts[i].getBBox().width > xBandWdith) {
+            g.selectAll("text").attr("text-anchor", "end").attr("transform", "translate(0,0) rotate(-45)")
+          } else {
+            g.selectAll("text").attr("text-anchor", "middle")
+          }
+        }
+      }
       
       let xAxis = g => g
         .attr("transform", `translate(0,${height - margin.bottom})`)
         .call(d3.axisBottom(x).tickSizeOuter(0))
+        .call(textStyle)
+        // .call(g => g.selectAll("text").attr("text-anchor", "end").attr("transform", "translate(0,0) rotate(-45)"))
+        // .call(g => {g.selectAll("text").attr("textLength", x.bandwidth()).attr("dominant-baseline", "Hanging"), console.log('text', g.selectAll("text").node().getBBox())})
+        // .call(g => {g.selectAll("text").attr("textLength", x.bandwidth()).attr("lengthAdjust", "spacingAndGlyphs").attr("text-anchor", "middle");})
 
       let yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
@@ -89,14 +111,14 @@ export default {
       // data[0] = data[1];
       // data[1] = arm;
       data.reverse();
-      console.log(data);
+      // console.log(data);
       x.domain(data.map(d => d.name));
       bar.data(data, d => d.name)
         // .order()
         .transition(t)
         .delay((d, i) => i * 20)
         .attr("x", d => x(d.name));
-      console.log(gx)
+      // console.log(gx)
       gx.transition(t)
         .call(xAxis)
         .selectAll(".tick")
@@ -112,10 +134,9 @@ export default {
         .translateExtent(extent)
         .extent(extent)
         .on("zoom", function (event) {
-          console.log('aaa')
           console.log([margin.left, width - margin.right].map(d => event.transform.applyX(d)))
           x.range([margin.left, width - margin.right].map(d => event.transform.applyX(d)));
-          console.log('svg.selectAll(".bars rect")', svg.selectAll(".bars rect"))
+          // console.log('svg.selectAll(".bars rect")', svg.selectAll(".bars rect"))
           svg.selectAll(".bars rect").attr("x", d => x(d.name)).attr("width", x.bandwidth());
           svg.selectAll(".x-axis").call(xAxis);
         }));      

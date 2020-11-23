@@ -2,14 +2,14 @@
   <div id="app">
     <simple-pie v-if="false"></simple-pie>
     <simple-area v-if="false"></simple-area>
-    <sortable-bar v-if="false"></sortable-bar>
+    <sortable-bar v-if="true"></sortable-bar>
     <horizontal-bar v-if="false"></horizontal-bar>
     <area-chart v-if="false"></area-chart>
     <area-with-missing-data v-if="false"></area-with-missing-data>
     <kernel-density-estimation v-if="false"></kernel-density-estimation>
     <line-chart v-if="false"></line-chart>
     <pie-chart v-if="false"></pie-chart>
-    <donut-chart></donut-chart>
+    <donut-chart v-if="false"></donut-chart>
   </div>
 </template>
 
