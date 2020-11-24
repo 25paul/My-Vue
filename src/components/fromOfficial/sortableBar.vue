@@ -33,7 +33,7 @@ export default {
       // console.log(d3.create('svg').node());
       // 使用d3创建svg，设置属性
       const svg = d3.create("svg")
-        .attr("viewBox", [0, 0, width * 2, height * 2])
+        .attr("viewBox", [0, 0, width, height])
         .attr('width', width)
         .attr('height', height);
 
@@ -43,7 +43,7 @@ export default {
       let x = d3.scaleBand()
         .domain(data.map(d => d.name))
         .range([margin.left, width - margin.right])
-        .padding(0.2)
+        .padding(0.1)
       
       // console.log(x('A'))
 
@@ -51,15 +51,25 @@ export default {
         .domain([0, d3.max(data, d => d.value)]).nice()
         .range([height - margin.bottom, margin.top])
 
-      let textStyle = g => {
+      let textStyle = (g, a, b) => {
+        console.log(g, a, b)
         // console.log('texthahah', g.selectAll("text").nodes())
         // console.log('xbandwidth', x.bandwidth())
         let xBandWdith = x.bandwidth();
         var texts = g.selectAll("text").nodes();
+        console.log("xPadding", x.padding());
+        console.log("xBandWdith", x.bandwidth());
+        console.log(xBandWdith/(1 - x.padding()));
+        let xWidth = x.bandwidth()/(1 - x.padding());
+        console.log('selectText', g.selectAll('text'))
         for (let i = 0; i < texts.length; i++) {
           // console.log('text'+i, texts[i].getBBox());
-          if (texts[i].getBBox().width > xBandWdith) {
-            g.selectAll("text").attr("text-anchor", "end").attr("transform", "translate(0,0) rotate(-45)")
+          // if (texts[i].getBBox().width > xBandWdith) {
+          if (texts[i].getBBox().width > xWidth) {
+            console.log(texts[i].firstChild.splitText(3))
+            texts[i].setAttribute("text-anchor", "start");
+            // texts[i].setAttribute("transform", "translate(0,0) rotate(35)")
+            // g.selectAll("text").attr("text-anchor", "start").attr("transform", "translate(0,0) rotate(35)")
           } else {
             g.selectAll("text").attr("text-anchor", "middle")
           }
