@@ -63,17 +63,39 @@ export default {
         let xWidth = x.bandwidth()/(1 - x.padding());
         console.log('selectText', g.selectAll('text'))
         for (let i = 0; i < texts.length; i++) {
+          texts[i].setAttribute("title", texts[i].textContent);
           // console.log('text'+i, texts[i].getBBox());
           // if (texts[i].getBBox().width > xBandWdith) {
           if (texts[i].getBBox().width > xWidth) {
-            console.log(texts[i].firstChild.splitText(3))
-            texts[i].setAttribute("text-anchor", "start");
+            let val = texts[i].firstChild;
+            let splitVal = val.splitText(1)
+            let textDom = document.createTextNode('...')
+            texts[i].insertBefore(textDom, splitVal)
+            console.log(val, splitVal, texts[i].childNodes, textDom);
+            texts[i].childNodes[2].remove();
+            // console.log(splitVal, texts[i].childNodes[0])
+            // texts[i].firstChild.nodeValue = 'hehe';
+            // let child = texts[i].firstChild;
+            // texts[i].removeChild(texts[i].childNodes[0])
+            // console.log(val.data+'...')
+            // data[i].name = val.data
+            // x.domain(data.map(d => {d.name+'haha'}))
+            // g.selectAll('text').call(g => {
+            //   console.log(g)
+            // })
+            // g.selectAll('text').each((item)=>{
+              // console.log(item[i]);
+            // })
+            // console.log(x);
+            texts[i].setAttribute("text-anchor", "middle");
             // texts[i].setAttribute("transform", "translate(0,0) rotate(35)")
             // g.selectAll("text").attr("text-anchor", "start").attr("transform", "translate(0,0) rotate(35)")
           } else {
             g.selectAll("text").attr("text-anchor", "middle")
           }
         }
+        // x.domain(cData)
+        console.log(x.prototype)
       }
       
       let xAxis = g => g
@@ -89,7 +111,10 @@ export default {
         .call(d3.axisLeft(y))
         .call(g => g.select(".domain").remove())
       
-      const gx = svg.append("g")
+      // const gx = svg.append("g")
+      //   .attr("class", "x-axis")
+      //   .call(xAxis);
+      svg.append("g")
         .attr("class", "x-axis")
         .call(xAxis);
 
@@ -97,7 +122,18 @@ export default {
         .attr("class", "y-axis")
         .call(yAxis);
 
-      const bar = svg.append("g")
+      // const bar = svg.append("g")
+      //   .attr("class", "bars")
+      //   .attr("fill", "steelblue")
+      //   .selectAll("rect")
+      //   .data(data)
+      //   .join("rect")
+      //   .style("mix-blend-mode", "multiply")
+      //   .attr("x", d => x(d.name))
+      //   .attr("y", d => y(d.value))
+      //   .attr("height", d => y(0) - y(d.value))
+      //   .attr("width", x.bandwidth());
+      svg.append("g")
         .attr("class", "bars")
         .attr("fill", "steelblue")
         .selectAll("rect")
@@ -114,25 +150,21 @@ export default {
       /*
       *添加排序
       */
-      const t = svg.transition()
-        .duration(750);
-      // data.sort();
-      // let arm = data[0];
-      // data[0] = data[1];
-      // data[1] = arm;
-      data.reverse();
-      // console.log(data);
-      x.domain(data.map(d => d.name));
-      bar.data(data, d => d.name)
-        // .order()
-        .transition(t)
-        .delay((d, i) => i * 20)
-        .attr("x", d => x(d.name));
-      // console.log(gx)
-      gx.transition(t)
-        .call(xAxis)
-        .selectAll(".tick")
-        .delay((d, i) => i * 20);
+      // const t = svg.transition()
+      //   .duration(750);
+      // data.reverse();
+      // // console.log(data);
+      // x.domain(data.map(d => d.name));
+      // bar.data(data, d => d.name)
+      //   // .order()
+      //   .transition(t)
+      //   .delay((d, i) => i * 20)
+      //   .attr("x", d => x(d.name));
+      // // console.log(gx)
+      // gx.transition(t)
+      //   .call(xAxis)
+      //   .selectAll(".tick")
+      //   .delay((d, i) => i * 20);
 
       /*
       * 缩放
