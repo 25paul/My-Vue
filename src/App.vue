@@ -1,30 +1,24 @@
 <template>
   <div id="app">
-    <todo-list></todo-list>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import TodoList from './pages/index';
+
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    TodoList
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 #app {
-  max-width: 1260px;
-  width: 78%;
-  margin: 0 auto;
-  background-color: #eee;
-  .template {
-    color: #aaa;
-    &:before {
-      content: "";
-    }
-  }
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>

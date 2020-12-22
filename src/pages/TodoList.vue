@@ -7,51 +7,14 @@
       </div>
     </div>
     <div class="index-main">
-      <h3 class="big-title">添加任务：</h3>
-      <input
-        placeholder="例如：打球；    提示：+回车即可添加任务"
-        class="task-input"
-        type="text"
-        v-on:keyup.enter="inputEnterHandle"
-        v-model="todo"
-      />
-      <!-- <ul class="task-type">
-        <li>个任务未完成</li>
-        <li class="action">
-          <a :class="{active:visibility!=='unCompleted'&&visibility!=='completed'}" href="#all">所有任务</a>
-          <a :class="{active:visibility==='unCompleted'}" href="#unCompleted">未完成的任务</a>
-          <a :class="{active:visibility==='completed'}" href="#completed">完成的任务</a>
-        </li>
-      </ul> -->
-      <h3 class="big-title">任务列表：</h3>
-      <div class="tasks">
-        <span class="no-task-tip" v-show="!lists.length">还没有添加任何任务</span>
-        <div class="task-header">
-          <div class="task-item">
-            <div class="item-id">id</div>
-            <div class="item-name">任务名称</div>
-            <div class="item-content">任务内容</div>
-            <div class="item-deadline">截止时间</div>
-            <div class="item-status">状态</div>
-            <div class="item-operate">操作</div>
-          </div>
-        </div>
-        <ul class="task-lists" v-show="lists.length">
-          <li class="task-item" v-for="(item, index) in getLists" :key="index">
-            <div class="item-id">{{item.id}}</div>
-            <div class="item-name">{{item.name}}</div>
-            <div class="item-content">{{item.content}}</div>
-            <div class="item-deadline">{{item.deadline}}</div>
-            <div class="item-status">{{statusVal(item.status)}}</div>
-            <div class="item-operate">
-              <div class=""></div>
-              <div class=""></div>
-              <div class=""></div>
-            </div>
-          </li>
-        </ul>
+      <div class="add-btn">
+        <el-button>新增</el-button>
+      </div>
+      <div class="main-table">
+
+      </div>
     </div>
-</div>
+    
   </div>
 </template>
 
@@ -72,7 +35,7 @@ export default {
       statusObj: {
         1: '未完成',
         2: '已完成'
-      }
+      },
     };
   },
   components: {},
@@ -100,10 +63,15 @@ export default {
 </script>
 <style lang='scss' scoped>
 .todo-index {
+  width: 80%;
+  max-width: 960px;
+  min-width: 480px;
+  margin: 0 auto;
   .index-top{
     width: 100%;
     height: 40px;
     background-color: #99b4e5;
+    margin-bottom: 10px;
     .index-content{
       width: 100%;
       text-align: center;
@@ -116,8 +84,11 @@ export default {
   }
   .index-main{
     width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box
+    box-sizing: border-box;
+    .add-btn {
+      width: 100%;
+      border-radius: 4px;
+    }
   }
   .task-input{
     width: 100%;
