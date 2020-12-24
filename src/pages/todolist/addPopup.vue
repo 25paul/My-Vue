@@ -1,6 +1,6 @@
 <template>
   <div class="add-popup">
-    <el-button type="text" @click="dialogFormVisible = true">新增</el-button>
+    <el-button @click="dialogFormVisible = true">新增</el-button>
     <el-dialog
       title="新增任务"
       :visible.sync="dialogFormVisible">
@@ -75,7 +75,7 @@ export default {
   props: {
   },
   methods: {
-    async certainHandle () {
+    certainHandle () {
       this.dialogFormVisible = false;
       this.createHandle();
     },

@@ -7,8 +7,9 @@
       </div>
     </div>
     <div class="index-main">
-      <div class="add-btn">
-        <el-button>新增</el-button>
+      <div class="main-operate">
+        <add-popup></add-popup>
+        <status-select></status-select>
       </div>
       <div class="main-table">
         <el-table
@@ -50,12 +51,12 @@
         </el-pagination>
       </div>
     </div>
-    <add-popup></add-popup>
   </div>
 </template>
 
 <script>
 import AddPopup from './todolist/addPopup.vue';
+import StatusSelect from './todolist/statusSelect.vue';
 export default {
   data () {
     return {
@@ -66,7 +67,7 @@ export default {
         {id: 2, name: '打足球', deadline: '20201224', content: '在下午打比赛', status: 1},
         {id: 3, name: '打排球', deadline: '20201223', content: '在下午打比赛', status: 1},
         {id: 4, name: '打高尔夫球', deadline: '20201222', content: '在下午打比赛', status: 1},
-        {id: 5, name: '打棒球', deadline: '20201221', content: '在下午打比赛', status: 1},
+        {id: 5, name: '打棒球', deadline: '20201221', content: '在下午打比赛在下午打比赛在下午打比赛在下午打比赛在下午打比赛在下午打比赛在下午打比赛', status: 1},
         {id: 6, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
         {id: 7, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
         {id: 8, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
@@ -77,11 +78,12 @@ export default {
       statusObj: {
         1: '未完成',
         2: '已完成'
-      },
+      }
     };
   },
   components: {
-    AddPopup
+    AddPopup,
+    StatusSelect
   },
   computed: {
     getLists () {
@@ -132,9 +134,11 @@ export default {
   .index-main{
     width: 100%;
     box-sizing: border-box;
-    .add-btn {
+    .main-operate {
       width: 100%;
-      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
     }
     .main-table {
       margin-bottom: 10px;

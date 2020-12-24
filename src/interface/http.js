@@ -8,8 +8,13 @@ axios.defaults.baseURL = apiAddr;
 axios.defaults.headers = {
   'Content-Type': 'application/json;'
 };
-// axios.interceptors.request.use(
-//   config => {
+axios.interceptors.request.use(
+  config => {
+    if (config.data) {
+      config.data = JSON.stringify(config.data);
+    }
+
+    console.log(config);
     // if (config.method === 'get') {
     //   for (let key in config.params) {
     //     if (config.params[key] === null || config.params[key] === undefined || config.params[key] === '') {
@@ -28,11 +33,12 @@ axios.defaults.headers = {
     // if (dcUserToken) {
     //   config.headers.Authorization = dcUserToken;
     // }
-    // return config;
-  // },
-  // err => {
+    return config;
+  },
+  err => {
+    console.log(err);
   //   return Promise.reject(err);
-  // });
+  });
 
 // axios.interceptors.response.use(
 //   response => {
