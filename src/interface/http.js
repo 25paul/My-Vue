@@ -13,22 +13,20 @@ axios.interceptors.request.use(
     if (config.data) {
       config.data = JSON.stringify(config.data);
     }
-
-    console.log(config);
-    // if (config.method === 'get') {
-    //   for (let key in config.params) {
-    //     if (config.params[key] === null || config.params[key] === undefined || config.params[key] === '') {
-    //       delete config.params[key];
-    //     }
-    //   }
-    //   config.params.refresh_time = Date.now();
-    // } else {
-    //   for (let key in config.data) {
-    //     if (config.data[key] === null || config.data[key] === undefined || config.data[key] === '') {
-    //       delete config.data[key];
-    //     }
-    //   }
-    // }
+    if (config.method === 'get') {
+      for (let key in config.params) {
+        if (config.params[key] === null || config.params[key] === undefined || config.params[key] === '') {
+          delete config.params[key];
+        }
+      }
+      // config.params.refresh_time = Date.now();
+    } else {
+      for (let key in config.data) {
+        if (config.data[key] === null || config.data[key] === undefined || config.data[key] === '') {
+          delete config.data[key];
+        }
+      }
+    }
     // let dcUserToken = localStorage.getItem('dcUserToken');
     // if (dcUserToken) {
     //   config.headers.Authorization = dcUserToken;
@@ -36,32 +34,31 @@ axios.interceptors.request.use(
     return config;
   },
   err => {
-    console.log(err);
-  //   return Promise.reject(err);
+    return Promise.reject(err);
   });
 
 // axios.interceptors.response.use(
 //   response => {
-    // if (response.status === 200) {
-    //   if (response.data.code === 0 || response.data.code === 302) {
-    //     return response.data;
-    //   } else {
-    //     if (response.config.method !== 'get') {
-    //       Vue.prototype.$message({
-    //         message: response.data.msg,
-    //         type: 'error'
-    //       });
-    //       return response.data;
-    //     }
-    //     return response.data;
-    //   };
-    // } else {
-    //   Vue.prototype.$message({
-    //     message: '状态码不对',
-    //     type: 'error'
-    //   });
-    // }
-  // },
+//     if (response.status === 200) {
+//       if (response.data.code === 0 || response.data.code === 302) {
+//         return response.data;
+//       } else {
+//         if (response.config.method !== 'get') {
+//           Vue.prototype.$message({
+//             message: response.data.msg,
+//             type: 'error'
+//           });
+//           return response.data;
+//         }
+//         return response.data;
+//       };
+//     } else {
+//       Vue.prototype.$message({
+//         message: '状态码不对',
+//         type: 'error'
+//       });
+//     }
+//   },
   // error => {
     // Vue.prototype.$message.error('网络或者服务器异常，请稍后重试');
     // if (error.response) {
