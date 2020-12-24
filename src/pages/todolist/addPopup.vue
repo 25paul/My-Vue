@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { post } from '../../interface/server';
 export default {
   data () {
     return {
@@ -74,9 +75,13 @@ export default {
   props: {
   },
   methods: {
-    certainHandle () {
+    async certainHandle () {
       this.dialogFormVisible = false;
-      console.log(this.form);
+      this.createHandle();
+    },
+    async createHandle () {
+      let params = this.form;
+      await post('create', params);
     }
   }
 }
