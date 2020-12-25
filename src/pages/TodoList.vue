@@ -14,32 +14,25 @@
       <div class="main-table">
         <el-table
           :data="tableData"
-          style="width: 100%">
+          style="width: 100%"
+          empty-text="暂无数据">
           <el-table-column
-            fixed
-            prop="id"
-            label="id"
-            min-width="100">
+            v-for="(item, index) in headerData"
+            :key="index"
+            :prop="item.key"
+            :label="item.label"
+            align="center"
+            :min-width="item.width">
           </el-table-column>
           <el-table-column
-            prop="name"
-            label="任务"
-            min-width="150">
-          </el-table-column>
-          <el-table-column
-            prop="content"
-            label="内容"
-            min-width="200">
-          </el-table-column>
-          <el-table-column
-            prop="deadline"
-            label="截止时间"
-            min-width="250">
-          </el-table-column>
-          <el-table-column
-            prop="status"
-            label="状态"
-            min-width="100">
+            label="操作"
+            min-width="150"
+            align="center">
+            <template slot-scope="scope">
+              <el-button type="text" size="small" @click="editHandle(scope.row)">编辑</el-button>
+              <el-button type="text" size="small" @click="finishHandle(scope.row)">完成</el-button>
+              <el-button type="text" size="small" @click="deleteHandle(scope.row)">删除</el-button>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -53,6 +46,7 @@
         </el-pagination>
       </div>
     </div>
+    <edit-popup :editVisible="editVisible" @editClose="editClose" :formData="editFormData"></edit-popup>
   </div>
 </template>
 
@@ -60,23 +54,43 @@
 import AddPopup from './todolist/addPopup.vue';
 import StatusSelect from './todolist/statusSelect.vue';
 import { get } from '../interface/server';
+import EditPopup from './todolist/editPopup.vue';
 export default {
   data () {
     return {
       todo: '',
       visibility: 'unCompleted',
+      headerData: [
+        {
+          label: 'id',
+          key: 'id',
+          width: 100
+        },
+        {
+          label: '任务',
+          key: 'name',
+          width: 150
+        },
+        {
+          label: '内容',
+          key: 'content',
+          width: 200
+        },
+        {
+          label: '截止时间',
+          key: 'deadline',
+          width: 200
+        },
+        {
+          label: '状态',
+          key: 'status',
+          width: 100
+        }
+      ],
       tableData: [
         {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
-        {id: 2, name: '打足球', deadline: '20201224', content: '在下午打比赛', status: 1},
-        {id: 3, name: '打排球', deadline: '20201223', content: '在下午打比赛', status: 1},
-        {id: 4, name: '打高尔夫球', deadline: '20201222', content: '在下午打比赛', status: 1},
-        {id: 5, name: '打棒球', deadline: '20201221', content: '在下午打比赛在下午打比赛在下午打比赛在下午打比赛在下午打比赛在下午打比赛在下午打比赛', status: 1},
-        {id: 6, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
-        {id: 7, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
-        {id: 8, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
-        {id: 9, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
-        {id: 10, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
-        {id: 11, name: '打个球', deadline: '20201220  ', content: '在下午打比赛', status: 1},
+        {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
+        {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
       ],
       statusObj: {
         1: '未完成',
@@ -85,12 +99,14 @@ export default {
       totalCount: 0,
       curPage: 1,
       curStatus: -1,
-      // curPage: 1
+      editVisible: false,
+      editFormData: {}
     };
   },
   components: {
     AddPopup,
-    StatusSelect
+    StatusSelect,
+    EditPopup
   },
   computed: {
     getLists () {
@@ -131,6 +147,34 @@ export default {
     pageChange (val) {
       console.log(val);
       this.getTodoList(this.curStatus, val);
+    },
+    deleteHandle () {
+      this.$confirm('此操作将删除该任务, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });          
+      });
+    },
+    editHandle (val) {
+      this.editVisible = true;
+      this.editFormData = val;
+      console.log(val);
+    },
+    editClose () {
+      this.editVisible = false;
+    },
+    finishHandle (val) {
+      console.log(val);
     }
   }
 }
