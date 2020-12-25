@@ -6,12 +6,13 @@ import {
 
 axios.defaults.baseURL = apiAddr;
 axios.defaults.headers = {
-  'Content-Type': 'application/json;'
+  'Content-Type': 'application/json;charset=UTF-8'
 };
 axios.interceptors.request.use(
   config => {
     if (config.data) {
       config.data = JSON.stringify(config.data);
+      console.log(config.data);
     }
     if (config.method === 'get') {
       for (let key in config.params) {
@@ -31,6 +32,7 @@ axios.interceptors.request.use(
     // if (dcUserToken) {
     //   config.headers.Authorization = dcUserToken;
     // }
+    console.log(config);
     return config;
   },
   err => {

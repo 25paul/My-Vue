@@ -1,3 +1,4 @@
 export const api = {
-  'create': '/create',
+  create: '/create',
+  list: '/list'
 }

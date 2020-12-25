@@ -29,12 +29,12 @@
           <el-table-column
             prop="content"
             label="内容"
-            min-width="250">
+            min-width="200">
           </el-table-column>
           <el-table-column
             prop="deadline"
             label="截止时间"
-            min-width="150">
+            min-width="250">
           </el-table-column>
           <el-table-column
             prop="status"
@@ -43,11 +43,13 @@
           </el-table-column>
         </el-table>
       </div>
-      <div class="main-pagination" v-if="paginationTotal > 1">
+      <div class="main-pagination">
         <el-pagination
           background
           layout="prev, pager, next"
-          :total="tableData.length">
+          :total="totalCount"
+          :hide-on-single-page="true"
+          @current-change="pageChange">
         </el-pagination>
       </div>
     </div>
@@ -57,6 +59,7 @@
 <script>
 import AddPopup from './todolist/addPopup.vue';
 import StatusSelect from './todolist/statusSelect.vue';
+import { get } from '../interface/server';
 export default {
   data () {
     return {
@@ -78,7 +81,11 @@ export default {
       statusObj: {
         1: '未完成',
         2: '已完成'
-      }
+      },
+      totalCount: 0,
+      curPage: 1,
+      curStatus: -1,
+      // curPage: 1
     };
   },
   components: {
@@ -96,7 +103,9 @@ export default {
     }
   },
   watch: {},
-  mounted () {},
+  mounted () {
+    this.getTodoList(this.curStatus, this.curPage);
+  },
   methods: {
     inputEnterHandle () {
 
@@ -106,6 +115,22 @@ export default {
     },
     statusVal (val) {
       return this.statusObj[val];
+    },
+    async getTodoList (status, page) {
+      let params = {
+        status,
+        page
+      };
+      let res = await get('list', params);
+      if (res.data) {
+        console.log(res);
+        this.totalCount = res.data.list.count;
+        this.tableData = res.data.list.rows;
+      }
+    },
+    pageChange (val) {
+      console.log(val);
+      this.getTodoList(this.curStatus, val);
     }
   }
 }

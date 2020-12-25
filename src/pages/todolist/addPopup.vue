@@ -39,6 +39,7 @@
 
 <script>
 import { post } from '../../interface/server';
+// import axios from 'axios';
 export default {
   data () {
     return {
@@ -78,9 +79,22 @@ export default {
     certainHandle () {
       this.dialogFormVisible = false;
       this.createHandle();
+      // axios({
+      //   method: 'post',
+      //   url: '/create',
+      //   data: {
+      //     "name": this.form.name,
+      //     "deadline": this.form.deadline,
+      //     "content": this.form.content
+      //   }
+      // });
     },
     async createHandle () {
-      let params = this.form;
+      let params = {
+        "name": this.form.name,
+        "deadline": this.form.deadline,
+        "content": this.form.content
+      };
       await post('create', params);
     }
   }
