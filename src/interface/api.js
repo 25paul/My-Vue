@@ -1,4 +1,6 @@
 export const api = {
   create: '/create',
-  list: '/list'
+  list: '/list',
+  update_status: '/update_status',
+  update: '/update'
 }

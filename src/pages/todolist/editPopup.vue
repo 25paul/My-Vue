@@ -88,6 +88,7 @@ export default {
     }
   },
   mounted () {
+    
   },
   methods: {
     certainHandle () {
@@ -111,12 +112,14 @@ export default {
 
     },
     async createHandle () {
+      let id = this.form.id;
       let params = {
+        id,
         "name": this.form.name,
         "deadline": this.form.deadline,
         "content": this.form.content
       };
-      await post('create', params);
+      await post('update', params);
     }
   }
 }

@@ -96,6 +96,7 @@ export default {
         "content": this.form.content
       };
       await post('create', params);
+      this.$emit('createTask');
     }
   }
 }

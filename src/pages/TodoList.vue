@@ -8,8 +8,8 @@
     </div>
     <div class="index-main">
       <div class="main-operate">
-        <add-popup></add-popup>
-        <status-select></status-select>
+        <add-popup @createTask="createTask"></add-popup>
+        <status-select @selectStatus="selectStatusHandle"></status-select>
       </div>
       <div class="main-table">
         <el-table
@@ -22,7 +22,8 @@
             :prop="item.key"
             :label="item.label"
             align="center"
-            :min-width="item.width">
+            :min-width="item.width"
+            :show-overflow-tooltip="true">
           </el-table-column>
           <el-table-column
             label="操作"
@@ -53,7 +54,7 @@
 <script>
 import AddPopup from './todolist/addPopup.vue';
 import StatusSelect from './todolist/statusSelect.vue';
-import { get } from '../interface/server';
+import { get, post } from '../interface/server';
 import EditPopup from './todolist/editPopup.vue';
 export default {
   data () {
@@ -64,17 +65,17 @@ export default {
         {
           label: 'id',
           key: 'id',
-          width: 100
+          width: 80
         },
         {
           label: '任务',
           key: 'name',
-          width: 150
+          width: 120
         },
         {
           label: '内容',
           key: 'content',
-          width: 200
+          width: 150
         },
         {
           label: '截止时间',
@@ -87,14 +88,16 @@ export default {
           width: 100
         }
       ],
-      tableData: [
-        {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
-        {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
-        {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
-      ],
+      // tableData: [
+      //   {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
+      //   {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
+      //   {id: 1, name: '打蓝球', deadline: '20201225', content: '在下午打比赛', status: 1},
+      // ],
+      tableData: [],
       statusObj: {
-        1: '未完成',
-        2: '已完成'
+        1: '待办',
+        2: '完成',
+        3: '删除'
       },
       totalCount: 0,
       curPage: 1,
@@ -148,12 +151,14 @@ export default {
       console.log(val);
       this.getTodoList(this.curStatus, val);
     },
-    deleteHandle () {
+    deleteHandle (val) {
       this.$confirm('此操作将删除该任务, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        this.updateStatus(val.id, 3);
+        val.status = 3;
         this.$message({
           type: 'success',
           message: '删除成功!'
@@ -175,6 +180,31 @@ export default {
     },
     finishHandle (val) {
       console.log(val);
+      this.updateStatus(val.id, 2);
+      val.status = 2;
+    },
+    selectStatusHandle (val) {
+      this.curPage = 1;
+      this.curStatus = val;
+      this.getTodoList(this.curStatus, this.curPage);
+    },
+    createTask () {
+      this.curPage = 1;
+      this.curStatus = -1;
+      setTimeout(() => {
+        this.getTodoList(this.curStatus, this.curPage);
+      }, 500)
+      // this.getTodoList(this.curStatus, this.curPage);
+    },
+    async updateStatus (id, status) {
+      let params = {
+        id,
+        status
+      };
+      let res = await post('update_status', params);
+      if (res.data) {
+        console.log(res.data);
+      }
     }
   }
 }

@@ -1,7 +1,10 @@
 <!--  -->
 <template>
   <div class="status-select">
-    <el-select v-model="value" placeholder="请选择">
+    <el-select
+      v-model="value"
+      placeholder="请选择"
+      @change="selectHandle">
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -16,13 +19,24 @@
 export default {
   data () {
     return {
-      options: [{
-        value: '1',
-        label: '已完成'
-      }, {
-        value: '2',
-        label: '未完成'
-      }],
+      options: [
+        {
+          value: '-1',
+          label: '全部'
+        },
+        {
+          value: '1',
+          label: '待办'
+        },
+        {
+          value: '2',
+          label: '完成'
+        },
+        {
+          value: '3',
+          label: '删除'
+        }
+      ],
       value: ''
     };
   },
@@ -30,7 +44,11 @@ export default {
   computed: {},
   watch: {},
   mounted () {},
-  methods: {}
+  methods: {
+    selectHandle (val) {
+      this.$emit('selectStatus', val)
+    }
+  }
 }
 </script>
 <style lang='scss' scoped>
