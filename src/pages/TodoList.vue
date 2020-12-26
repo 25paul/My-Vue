@@ -31,8 +31,8 @@
             align="center">
             <template slot-scope="scope">
               <el-button type="text" size="small" @click="editHandle(scope.row)">编辑</el-button>
-              <el-button type="text" size="small" @click="finishHandle(scope.row)">完成</el-button>
-              <el-button type="text" size="small" @click="deleteHandle(scope.row)">删除</el-button>
+              <el-button type="text" size="small" @click="finishHandle(scope.row)" v-if="scope.row.status !== 3">{{doOrNot[scope.row.status]}}</el-button>
+              <el-button type="text" size="small" @click="deleteHandle(scope.row)"  v-if="scope.row.status !== 3">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -98,6 +98,10 @@ export default {
         1: '待办',
         2: '完成',
         3: '删除'
+      },
+      doOrNot: {
+        2: '待办',
+        1: '完成'
       },
       totalCount: 0,
       curPage: 1,
@@ -179,9 +183,18 @@ export default {
       this.editVisible = false;
     },
     finishHandle (val) {
-      console.log(val);
-      this.updateStatus(val.id, 2);
-      val.status = 2;
+      let setStatus;
+      if (val.status === 1) {
+        setStatus = 2
+      } else {
+        setStatus = 1
+      }
+      this.updateStatus(val.id, setStatus);
+      val.status = setStatus;
+      this.$message({
+        type: 'success',
+        message: `设置任务${this.statusObj[setStatus]}成功！`
+      })
     },
     selectStatusHandle (val) {
       this.curPage = 1;
