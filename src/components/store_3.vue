@@ -3,7 +3,8 @@
   <div>
     <div>
       <h3>state</h3>
-      <div>{{getCount}}</div>
+      <div>a: {{getaCount}}</div>
+      <div>b: {{getbCount}}</div>
     </div>
     <div>
       <h3>getter</h3>
@@ -29,8 +30,11 @@ export default {
   components: {
   },
   computed: {
-    getCount () {
+    getaCount () {
       return this.$store.state.a.aCount;
+    },
+    getbCount () {
+      return this.$store.state.b.bCount;
     },
     doubleCount () {
       return this.$store.getters.doubleCount;
@@ -40,7 +44,7 @@ export default {
   mounted () {},
   methods: {
     moduleHandle () {
-      this.$store.commit('increment');
+      this.$store.commit('a/increment');
     },
     moduleHandle1 () {
       this.$store.dispatch('incrementIfOddOnRootSum');
