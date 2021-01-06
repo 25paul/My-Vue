@@ -1,4 +1,4 @@
-<!--  -->
+<!-- module -->
 <template>
   <div>
     <div>
