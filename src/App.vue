@@ -1,26 +1,33 @@
 <template>
   <div id="app">
-    <!-- <store-one></store-one> -->
+    <!-- 对应src/store_1/index.js -->
+    <store-one></store-one>
+
+    <!-- 对应src/store_1/index.js -->
     <!-- <store-two></store-two> -->
+
+    <!-- 对应src/store_3/index.js -->
     <!-- <store-three></store-three> -->
-    <store-four></store-four>
+
+    <!-- 对应src/store_4/index.js -->
+    <!-- <store-four></store-four> -->
   </div>
 </template>
 
 <script>
 
-// import StoreOne from './components/store_1';
+import StoreOne from './components/store_1';
 // import StoreTwo from './components/store_2';
 // import StoreThree from './components/store_3';
-import StoreFour from './components/store_4';
+// import StoreFour from './components/store_4';
 
 export default {
   name: 'App',
   components: {
-    // StoreOne,
+    StoreOne,
     // StoreTwo,
     // StoreThree
-    StoreFour
+    // StoreFour
   },
   computed: {
   },

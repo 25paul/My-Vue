@@ -1,41 +1,8 @@
-## My-Vue
-vue demo
+## vuex
 
-1. [#优化# vue elementUI checkbox 数据量大时响应卡顿](https://github.com/25paul/My-Vue/tree/elementui-checkbox)
+针对vuex做了几个demo：
 
-2. [#应用# todolist应用](https://github.com/25paul/My-Vue/tree/todo)
-
-3. [#vue# vue 常用自定义指令](https://github.com/25paul/My-Vue/tree/vue-directive)
-
-4. [#d3# ](https://github.com/25paul/My-Vue/tree/d3)
-
-#### 备注
-
-1. 用自定义指针或者extend实现加载提示；
-
-
-
-# myvue
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- store_1.vue 是最基本的store应用
+- store_2.vue 是使用map辅助函数
+- store_3.vue 是使用modules
+- store_4.vue 是实际开发中store的模块化开发

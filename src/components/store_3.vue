@@ -3,12 +3,12 @@
   <div>
     <div>
       <h3>state</h3>
-      <div>a: {{getaCount}}</div>
-      <div>b: {{getbCount}}</div>
+      <div>模块a: {{getaCount}}</div>
+      <div>模块b: {{getbCount}}</div>
     </div>
     <div>
       <h3>getter</h3>
-      <div>{{doubleCount}}</div>
+      <div>模块a的两倍：{{doubleCount}}</div>
     </div>
     <div>
       <h3>mutation</h3>
@@ -37,7 +37,7 @@ export default {
       return this.$store.state.b.bCount;
     },
     doubleCount () {
-      return this.$store.getters.doubleCount;
+      return this.$store.getters['a/doubleCount'];
     }
   },
   watch: {},
@@ -47,7 +47,7 @@ export default {
       this.$store.commit('a/increment');
     },
     moduleHandle1 () {
-      this.$store.dispatch('incrementIfOddOnRootSum');
+      this.$store.dispatch('a/incrementIfOddOnRootSum');
     }
   }
 }

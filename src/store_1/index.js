@@ -46,6 +46,7 @@ const store = new Vuex.Store({
       return getters.doneTodos.length;
     },
     // 你也可以通过让 getter 返回一个函数，来实现给 getter 传参。在你对 store 里的数组进行查询时非常有用。
+    // 注意，getter 在通过方法访问时，每次都会去进行调用，而不会缓存结果。
     getTodoById: state => id => {
       return state.todos.filter(todo => todo.id === id);
     }
@@ -63,6 +64,9 @@ const store = new Vuex.Store({
     // Actions 支持同样的载荷方式和对象方式进行分发
   }
 })
+
+// 可以通过 store.state 来获取状态对象，以及通过 store.commit 方法触发状态变更
+// store.commit('increment')；   console.log(store.state.count) 
 
 export default store;
 

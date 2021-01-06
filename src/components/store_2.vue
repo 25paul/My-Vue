@@ -7,7 +7,7 @@
     </div>
     <div>
       <h3>getters</h3>
-      <div>{{doneCount}}</div>
+      <div>已完成的列表个数：{{doneCount}}</div>
     </div>
     <div>
       <h3>mutation</h3>
