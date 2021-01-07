@@ -66,8 +66,12 @@ export default {
   mounted () {},
   methods: {
     clickHandle () {
-      this.$store.commit('increment');
+      // this.$store.commit('increment');
+      setTimeout(() => {
+        this.$store.commit('increment');
+      }, 1000);
     },
+    // n可以是数值也可以是对象
     clickNHandle (n) {
       this.$store.commit('incrementN', n);
     },
