@@ -3,20 +3,40 @@
   <div>
     <div>
       <h3>state</h3>
+      <div>跟: {{getCount}}</div>
       <div>模块a: {{getaCount}}</div>
       <div>模块b: {{getbCount}}</div>
     </div>
     <div>
       <h3>getter</h3>
       <div>模块a的两倍：{{doubleCount}}</div>
+      <div>getter的四个参数state, getters, rootState, rootGetters：{{doubleandloca}}</div>
     </div>
     <div>
       <h3>mutation</h3>
-      <button @click="moduleHandle">click</button>
+      <div>
+        <span>commit</span>
+        <button @click="moduleHandle">click</button>
+      </div>
+      <div>
+        <span>get root mutations</span>
+        <button @click="mutationRootAndLocal">click</button>
+      </div>
     </div>
     <div>
       <h3>dispatch</h3>
-      <button @click="moduleHandle1">clickaction</button>
+      <div>
+        <span>actions</span>
+        <button @click="moduleHandle1">clickaction</button>
+      </div>
+      <div>
+        <span>get root actions</span>
+        <button @click="actionRootAndLocal">clickrootaction</button>
+      </div>
+      <div>
+        <span>root actions in module</span>
+        <button @click="rootActionHandle">clickrootaction</button>
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +50,9 @@ export default {
   components: {
   },
   computed: {
+    getCount () {
+      return this.$store.state.count;
+    },
     getaCount () {
       return this.$store.state.a.aCount;
     },
@@ -38,6 +61,9 @@ export default {
     },
     doubleCount () {
       return this.$store.getters['a/doubleCount'];
+    },
+    doubleandloca () {
+      return this.$store.getters['a/doubleandloca'];
     }
   },
   watch: {},
@@ -48,6 +74,15 @@ export default {
     },
     moduleHandle1 () {
       this.$store.dispatch('a/incrementIfOddOnRootSum');
+    },
+    mutationRootAndLocal () {
+      this.$store.commit('a/getRootIncrement');
+    },
+    actionRootAndLocal () {
+      this.$store.dispatch('a/getRootIncrement');
+    },
+    rootActionHandle () {
+      this.$store.dispatch('rootAction', {name: 'datacube'});
     }
   }
 }
