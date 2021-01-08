@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import store from './store_3/index.js';
+import store from './store_5/index.js';
 
 console.log(store);
 
