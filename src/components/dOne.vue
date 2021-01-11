@@ -51,6 +51,14 @@ export default {
       });
       chart.interaction('active-region');
 
+      chart.axis('x', {
+        title: {
+          style: {
+            fill: '#1890ff',
+          },
+        },
+      });
+
       // Step 3: 创建图形语法，绘制柱状图
       chart.interval().position('year*sales');
 
