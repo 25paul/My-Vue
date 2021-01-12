@@ -40,6 +40,8 @@ export default {
         width: 400
       });
 
+      console.log('chart', chart);
+
       // Step 2: 载入数据源
       chart.data(this.chartData);
 
@@ -51,6 +53,17 @@ export default {
       chart.scale('year', {
         nice: true,
       });
+
+      // chart.legend('sales', {
+      //   title: 'sales', // 不展示图例 title
+      // });
+      chart.legend({
+        position: 'top', // 设置图例的显示位置
+        itemGap: 20, // 图例项之间的间距
+        offsetX:100
+      });
+      // chart.legend(false); //所有的图例都不显示
+      // chart.legend('sales', false); // 不显示 cut 字段对应的图例
 
       chart.tooltip({
         showMarkers: false
@@ -66,7 +79,7 @@ export default {
       });
 
       // Step 3: 创建图形语法，绘制柱状图
-      chart.interval().position('year*sales');
+      chart.interval().position('year*sales').color('year').label('sales');
 
       // Step 4: 渲染图表
       chart.render();

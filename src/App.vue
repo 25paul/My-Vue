@@ -13,7 +13,8 @@
     <!-- <element-demo></element-demo> -->
     <!-- <data-handle></data-handle> -->
     <!-- <scale-index></scale-index> -->
-    <legend-index></legend-index>
+    <!-- <legend-index></legend-index> -->
+    <legend-demo></legend-demo>
   </div>
 </template>
 
@@ -31,7 +32,8 @@
 // import ElementDemo from './components/element/elementDemo';
 // import DataHandle from './components/dataHandle/dataHandle.vue';
 // import ScaleIndex from './components/scale/scaleIndex.vue';
-import LegendIndex from './components/legend/legendIndex.vue';
+// import LegendIndex from './components/legend/legendIndex.vue';
+import LegendDemo from './components/legend/legendDemo.vue';
 
 export default {
   components: {
@@ -48,7 +50,8 @@ export default {
     // ElementDemo,
     // DataHandle,
     // ScaleIndex,
-    LegendIndex
+    // LegendIndex,
+    LegendDemo
   },
   name: 'App'
 }
