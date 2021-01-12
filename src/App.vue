@@ -14,7 +14,10 @@
     <!-- <data-handle></data-handle> -->
     <!-- <scale-index></scale-index> -->
     <!-- <legend-index></legend-index> -->
-    <legend-demo></legend-demo>
+    <!-- <legend-demo></legend-demo> -->
+    <!-- <tooltip-index></tooltip-index> -->
+    <!-- <tooltip-one></tooltip-one> -->
+    <tooltip-two></tooltip-two>
   </div>
 </template>
 
@@ -33,7 +36,10 @@
 // import DataHandle from './components/dataHandle/dataHandle.vue';
 // import ScaleIndex from './components/scale/scaleIndex.vue';
 // import LegendIndex from './components/legend/legendIndex.vue';
-import LegendDemo from './components/legend/legendDemo.vue';
+// import LegendDemo from './components/legend/legendDemo.vue';
+// import TooltipIndex from './components/tooltip/tooltipIndex.vue';
+// import TooltipOne from './components/tooltip/tooltipOne.vue';
+import TooltipTwo from './components/tooltip/tooltipTwo.vue';
 
 export default {
   components: {
@@ -51,7 +57,10 @@ export default {
     // DataHandle,
     // ScaleIndex,
     // LegendIndex,
-    LegendDemo
+    // LegendDemo,
+    // TooltipIndex,
+    // TooltipOne,
+    TooltipTwo
   },
   name: 'App'
 }
