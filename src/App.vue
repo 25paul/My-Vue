@@ -17,7 +17,8 @@
     <!-- <legend-demo></legend-demo> -->
     <!-- <tooltip-index></tooltip-index> -->
     <!-- <tooltip-one></tooltip-one> -->
-    <tooltip-two></tooltip-two>
+    <!-- <tooltip-two></tooltip-two> -->
+    <tooltip-three></tooltip-three>
   </div>
 </template>
 
@@ -39,7 +40,8 @@
 // import LegendDemo from './components/legend/legendDemo.vue';
 // import TooltipIndex from './components/tooltip/tooltipIndex.vue';
 // import TooltipOne from './components/tooltip/tooltipOne.vue';
-import TooltipTwo from './components/tooltip/tooltipTwo.vue';
+// import TooltipTwo from './components/tooltip/tooltipTwo.vue';
+import TooltipThree from './components/tooltip/tooltipThree.vue';
 
 export default {
   components: {
@@ -60,7 +62,8 @@ export default {
     // LegendDemo,
     // TooltipIndex,
     // TooltipOne,
-    TooltipTwo
+    // TooltipTwo,
+    TooltipThree
   },
   name: 'App'
 }

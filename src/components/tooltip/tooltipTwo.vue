@@ -43,15 +43,32 @@ export default {
 
       chart.source(this.chartData);
 
+      chart.coord('theta', { innerRadius: 0.6, radius: 0.8 });
+
+      chart.tooltip({
+        showTitle: false,
+        itemTpl: '<li>{name}: {value}</li>'
+      });
+
       chart.interval()
         .adjust('stack')
         .position('value')
         .color('name')
-        .shape('slice-shape');
+        // .shape('slice-shape')
+        .tooltip('name*value', (name, value) => {
+          return {
+            name: name,
+            value: value + '%'
+          };
+        });
 
-      chart.interaction('element-active');
+      // chart.interaction('element-active');
 
       chart.render();
+
+      chart.on('tooltip:change', function(ev) {
+        console.log(ev);
+      })
     }
   }
 }
