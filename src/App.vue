@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <div class="template" ref="temp" @scroll.stop.prevent="scrollHandle">
-      <div class="appt">
-        <div class="child"  @scroll.stop.prevent="scrollHandle3">
-          <div class="temp"></div>
-        </div>
+    <vue-drag-resize :isActive="true" :w="50" :h="100">
+      <div>
+        <h3>Hello World!</h3>
+        <p>{{ top }} х {{ left }} </p>
+        <p>{{ width }} х {{ height }}</p>
       </div>
-    </div>
+    </vue-drag-resize>
   </div>
 </template>
 
@@ -14,48 +14,26 @@
 
 export default {
   name: 'App',
+  data () {
+    return {
+      width: 0,
+      height: 0,
+      top: 0,
+      left: 0
+    }
+  },
   components: {
   },
   methods: {
-    scrollHandle () {
-      console.log(0)
-    },
-    scrollHandle1 () {
-      console.log(1)
-    },
-    scrollHandle3 () {
-      console.log(3)
-      this.$refs.temp.style="overflow: hidden"
+    resize(newRect) {
+        this.width = newRect.width;
+        this.height = newRect.height;
+        this.top = newRect.top;
+        this.left = newRect.left;
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-#app {
-  height: 600px;
-  .template {
-    width: 300px;
-    height: 100%;
-    overflow: auto;
-    color: #aaa;
-    border: 1px solid red;
-    &:before {
-      content: "";
-    }
-    .appt {
-      width: 200px;
-      height: 2000px;
-    }
-    .child {
-      width: 200px;
-      height: 200px;
-      overflow: auto;
-      border: 1px solid #aaa;
-      .temp {
-        height: 1000px;
-      }
-    }
-  }
-}
 </style>
