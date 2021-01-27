@@ -5,13 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+    <script src="./leaflet-provider.js"></script>
+    <style>
+      #app {
+        height: 1000px;
+      }
+    </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">haha</div>
     <!-- built files will be auto injected -->
+    <script>
+      // var mymap = L.map('app', {preferCanvas: true, zoomControl: false}).mymap.setView([51.505, -0.09], 13);
+      var mymap = L.map('app', {preferCanvas: true, zoomControl: false});
+      L.tileLayer.provider('CartoDB.PositronNoLabels').addTo(mymap);
+
+      let lang = [
+        [30.287459, 120.153576],
+        [28.19409, 112.982279],
+        [26.075302, 119.306239],
+        [43.792818, 87.617733],
+        [31.86119, 117.283042],
+        [30.659462, 104.065735],
+        [30.584355, 114.298572],
+        [28.676493, 115.892151],
+      ]
+      let polyline = L.polyline(lang).addTo(mymap);
+      mymap.fitBounds(polyline.getBounds()).panInsideBounds(polyline.getBounds())
+      // var p1 = L.point(50, 50),
+      // p2 = L.point(50, 80),
+      // bounds = L.bounds(p1, p2);
+
+      L.circle([50.5, 130.5], {radius: 800}).addTo(mymap);
+
+      mymap.setView([36, 107], 5);
+    </script>
   </body>
 </html>
