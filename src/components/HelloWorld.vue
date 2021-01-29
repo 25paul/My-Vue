@@ -6,6 +6,7 @@
 <script>
 import { Scene, PointLayer } from '@antv/l7';
 import { GaodeMap } from '@antv/l7-maps';
+// import { Mapbox } from '@antv/l7-maps';
 export default {
   data() {
     return {};
@@ -15,11 +16,18 @@ export default {
       id: 'map',
       map: new GaodeMap({
         pitch: 0,
-        style: 'light',
-        center: [ 121.435159, 31.256971 ],
+        style: 'blank',
+        center: [ 34.00407302986006, 106.47111650000001 ],
         zoom: 14.89,
         minZoom: 10
       })
+      // map: new Mapbox({
+      //   style: 'blank',
+      //   center: [ 121.435159, 31.256971 ],
+      //   pitch: 4.00000000000001,
+      //   zoom: 14.89,
+      //   rotation: 19.313180925794313
+      // })
     });
     fetch(
       'https://gw.alipayobjects.com/os/basement_prod/893d1d5f-11d9-45f3-8322-ee9140d288ae.json'
@@ -56,7 +64,8 @@ export default {
 
         scene.addLayer(pointLayer);
       });
-
+    // 获得所有的图层，比如这里的PointLayer图层
+    console.log(scene.getLayers());
   }
 };
 </script>

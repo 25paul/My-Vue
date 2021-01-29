@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Hello Vue in CodeSandbox!" />
+    <!-- <HelloWorld msg="Hello Vue in CodeSandbox!" /> -->
+    <map-label></map-label>
   </div>
 </template>
 
 <script>
 
-import HelloWorld from "./components/HelloWorld";
+// import HelloWorld from "./components/HelloWorld";
+import MapLabel from './components/mapLabel.vue';
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    // HelloWorld,
+    MapLabel
   }
 };
 </script>
