@@ -1,3 +1,4 @@
+<!-- 路径动画 -->
 <template>
   <div>
     <div id="path-animate"></div>

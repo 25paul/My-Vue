@@ -2,8 +2,9 @@
   <div id="app">
     <!-- <HelloWorld msg="Hello Vue in CodeSandbox!" /> -->
     <!-- <map-label></map-label> -->
-    <path-animate></path-animate>
+    <!-- <path-animate></path-animate> -->
     <!-- <flow-diagram></flow-diagram> -->
+    <city-build></city-build>
   </div>
 </template>
 
@@ -12,15 +13,17 @@
 
 // import HelloWorld from "./components/HelloWorld";
 // import MapLabel from './components/mapLabel.vue';
-import PathAnimate from './components/pathAnimate.vue';
+// import PathAnimate from './components/pathAnimate.vue';
+import CityBuild from './components/CityBuild.vue';
 
 export default {
   name: "App",
   components: {
     // HelloWorld,
     // MapLabel,
-    PathAnimate,
+    // PathAnimate,
     // FlowDiagram
+    CityBuild
   }
 };
 </script>
