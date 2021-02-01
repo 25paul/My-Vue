@@ -3,10 +3,12 @@
     <!-- <HelloWorld msg="Hello Vue in CodeSandbox!" /> -->
     <!-- <map-label></map-label> -->
     <path-animate></path-animate>
+    <!-- <flow-diagram></flow-diagram> -->
   </div>
 </template>
 
 <script>
+// import FlowDiagram from './components/FlowDiagram.vue';
 
 // import HelloWorld from "./components/HelloWorld";
 // import MapLabel from './components/mapLabel.vue';
@@ -17,7 +19,8 @@ export default {
   components: {
     // HelloWorld,
     // MapLabel,
-    PathAnimate
+    PathAnimate,
+    // FlowDiagram
   }
 };
 </script>
