@@ -90,7 +90,7 @@ export default {
             }
           })
           .color('#ff6b34')
-          .shape('greatcircle')
+          .shape('arc3d')
           .size(2)
           .active(true)
           .animate({
@@ -103,8 +103,8 @@ export default {
           });
         // scene.addLayer(worldFill);
         console.log(worldLine, dotPoint, flyLine);
-        // scene.addLayer(worldLine);
-        // scene.addLayer(dotPoint);
+        scene.addLayer(worldLine);
+        scene.addLayer(dotPoint);
         scene.addLayer(flyLine);
       });
 
