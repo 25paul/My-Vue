@@ -7,12 +7,20 @@
     <!-- <city-build></city-build> -->
     <!-- <heatmap-honey /> -->
     <!-- <point-maker /> -->
-    <country-fill/>
+    <!-- <country-fill/> -->
+    <!-- <drawcontrol-circle/> -->
+    <!-- <drawcontrol-polygon/> -->
+    <!-- <draw-control/> -->
+    <cluster-chart/>
   </div>
 </template>
 
 <script>
-import CountryFill from './components/CountryFill.vue';
+import ClusterChart from './components/clusterChart.vue';
+// import DrawControl from './components/DrawControl.vue';
+// import CountryFill from './components/CountryFill.vue';
+// import DrawcontrolCircle from './components/DrawcontrolCircle.vue';
+// import DrawcontrolPolygon from './components/DrawcontrolPolygon.vue';
 // import HeatmapHoney from './components/HeatmapHoney.vue';
 // import FlowDiagram from './components/FlowDiagram.vue';
 
@@ -25,8 +33,12 @@ import CountryFill from './components/CountryFill.vue';
 export default {
   name: "App",
   components: {
-    CountryFill
+    // CountryFill,
+    // DrawcontrolCircle,
+    // DrawcontrolPolygon,
+    // DrawControl,
     // HelloWorld,
+    ClusterChart,
     // MapLabel,
     // PathAnimate,
     // PointMaker,
