@@ -79,6 +79,7 @@
         paginationAutoPageSize: true, //根据网页高度自动分页（前端分页）
         pinnedTopRowData:topRows, //顶部合计行
         pinnedBottomRowData:botRows ,//顶部合计行
+        //*******设置选择列********
         // rowSelection: 'multiple', //设置多行选中 single 表示只能选中一行
         // rowMultiSelectWithClick:true, 
         // rowDeselection:true,
@@ -95,6 +96,7 @@
         new agGrid.Grid(eGridDiv, gridOptions);
     });
 
+    //*******设置选择列--获取选中行********
     function getSelect() {
       alert(JSON.stringify(gridOptions.api.getSelectedRows())); 
     }
