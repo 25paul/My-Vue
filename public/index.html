@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <script>
+      HTMLCanvasElement.prototype.getContext = function(origFn) {
+        return function(type, attribs) {
+          attribs = attribs || {};
+          attribs.preserveDrawingBuffer = true;
+          return origFn.call(this, type, attribs);
+        };
+      }(HTMLCanvasElement.prototype.getContext);
+      </script>
   </head>
   <body>
     <noscript>

@@ -6,6 +6,8 @@
 <script>
 import { Scene, MarkerLayer, Marker, PointLayer, Popup } from '@antv/l7';
 import { GaodeMap } from '@antv/l7-maps';
+import html2canvas from 'html2canvas';
+// import * as htmlToImage from 'html-to-image';
 export default {
   data () {
     return {
@@ -54,6 +56,40 @@ export default {
       setTimeout(() => {
         this.addMapLabels();
       }, 100);
+      setTimeout(() => {
+        // let curDom = document.querySelector('body');
+        // console.log(curDom, html2canvas);
+        // html2canvas(curDom).then(function(canvas) {
+        //   console.log(canvas);
+        // //   document.body.appendChild(canvas);
+        // });
+        // let curCanvas = document.querySelector('.amap-layer');
+        // let gl = curCanvas.getContext("experimental-webgl", {preserveDrawingBuffer: true});
+        // console.log(gl.canvas.toDataURL());
+        // document.body.appendChild(curCanvas);
+        // console.log(gl.readPixels());
+        let curCanvas = document.querySelector('#label');
+        // let gl = curCanvas.getContext("webgl", {preserveDrawingBuffer: true});
+        html2canvas(curCanvas).then(function(canvas) {
+          console.log(canvas.toDataURL());
+        //   document.body.appendChild(canvas);
+        });
+
+// var node = document.getElementById('label');
+// htmlToImage.toPng(node)
+// .then(function (dataUrl) {
+//   console.log(dataUrl);
+//   // document.body.appendChild(dataUrl);
+// })
+// .catch(function (error) {
+//   console.error('oops, something went wrong!', error);
+// });
+        // document.body.appendChild(curCanvas);
+        // html2canvas(curDom, {canvas: curCanvas, scale: 1}).then(function(canvas) {
+        //   document.body.appendChild(canvas);
+        //   console.log('Drew on the existing canvas');
+        // });
+      }, 2000);
       this.scene.on('zoomend', () => {
         console.log('zoomed', this.markerLayer && this.markerLayer.markers);
         this.markerLayer.markers.forEach(item => {
